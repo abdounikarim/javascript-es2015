@@ -1,4 +1,8 @@
-var aGreatNumer = 10;
+let aGreatNumer = 10;
+
+if(true) {
+   aGreatNumer = 42;
+}
 
 setTimeout(() => {
    console.log(aGreatNumer);
