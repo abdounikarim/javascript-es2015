@@ -9,8 +9,8 @@
         constructor($wrapper)
         {
             this.$wrapper = $wrapper;
-            HelperInstances.set(this, new Helper(this.$wrapper));
-            return;
+            this.repLogs = [];
+            HelperInstances.set(this, new Helper(this.repLogs));
 
             this.loadRepLogs();
 
@@ -168,7 +168,7 @@
         _addRow(repLog) {
             //let {id, itemLabel, reps, totallyMadeUpKey = 'whatever'} = repLog;
             //console.log(id, itemLabel, reps, totallyMadeUpKey);
-
+            this.repLogs.push(repLog);
             const html = rowTemplate(repLog);
             this.$wrapper.find('tbody').append($.parseHTML(html));
 
@@ -181,13 +181,13 @@
      */
 
     class Helper {
-        constructor($wrapper) {
-            this.$wrapper = $wrapper;
+        constructor(repLogs) {
+            this.repLogs = repLogs;
         }
 
         calculateTotalWeight() {
             return Helper._calculateWeight(
-                this.$wrapper.find('tbody tr')
+                this.repLogs
             );
         }
 
@@ -200,10 +200,10 @@
             return weight + ' lbs';
         }
 
-        static _calculateWeight($elements) {
+        static _calculateWeight(repLogs) {
             let totalWeight = 0;
-            for (let element of $elements) {
-                totalWeight += $(element).data('weight');
+            for (let repLog of repLogs) {
+                totalWeight += repLog.totalWeightLifted;
             };
 
             return totalWeight;
