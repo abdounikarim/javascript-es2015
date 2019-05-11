@@ -1,11 +1,12 @@
-let aGreatNumer = 10;
+console.log(aGreatNumber);
+let aGreatNumber = 10;
 
 if(true) {
-   aGreatNumer = 42;
+   aGreatNumber = 42;
 }
 
 setTimeout(() => {
-   console.log(aGreatNumer);
+   console.log(aGreatNumber);
 }, 1000);
 
 console.log('waiting...');
